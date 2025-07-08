@@ -6,12 +6,14 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.conf import settings
 import jwt
 import datetime
+from rest_framework.permissions import AllowAny
 
 
 # "Banco de dados" em memória
 USERS_DB = {}
 
 class RegisterView(APIView):
+    permission_classes = [AllowAny]  # Permite acesso não autenticado
     def post(self, request):
         username = request.data.get('username')
         password = request.data.get('password')
